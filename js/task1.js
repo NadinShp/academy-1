@@ -1,7 +1,7 @@
 function getQuantityOfBinaryOne(number){
     let num = number>0 ? number : -(number);
     let binary = num.toString(2);
-    binary = (number>=-128 && number<=127)
+    binary = (number>=-127 && number<=127)
     ? binary.padStart(8, 0)
     : binary.padStart(16, 0);
     let forNegativeRes;
