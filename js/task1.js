@@ -9,6 +9,7 @@ xhr.open('GET', `${BASE_URL}/pokemon?limit=10`);
 xhr.responseType = 'json';
 xhr.send();
 xhr.onload = function(){
+    let counter = 0;
     if(xhr.status !== 200){
     console.log(`Error ${xhr.status}: ${xhr.statusText}`)
     }
@@ -26,7 +27,9 @@ xhr.onload = function(){
             const res = results[index].response;
             const {name, weight, height, id} = res;
             pokemons.push({name, weight, height, id});
+            counter++;
             }
+            if(counter===10){
             setInStorage.setPokemonInLocalStorage(pokemons);
             const sortedByHeight = getSortPokemonByHeight(pokemons);
             console.log("sortedByHeight", sortedByHeight);
@@ -34,9 +37,10 @@ xhr.onload = function(){
             const sortedByWeight = getSortPokemonByWeight(pokemons);
             console.log("sortedByWeight", sortedByWeight);
             setInStorage.setPokemonInSessionStorage(sortedByWeight);
-            }
+            }}
         })
-    }}
+    }
+}
 xhr.onerror = function(){
     console.log('Request failed');
 }
